@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 import { motion } from "framer-motion";
+import { Select } from "..";
 
 interface NavLinkProps {
   name: string;
@@ -55,8 +56,12 @@ function Index() {
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
   };
   return (
+
+    <div className="flex items-center justify-between px-14 w-full ">
+
+<Select />
     <motion.div
-      className="flex justify-center mt-[31px] space-x-8 mb-[32px]"
+      className="flex  mt-[31px]  mb-[32px]"
       initial="hidden"
       animate="show"
       viewport={{ once: true }}
@@ -69,6 +74,8 @@ function Index() {
         },
       }}
     >
+
+
       {navLinks.map((link) => {
         const isActive = pathname.startsWith(link.url, 0);
 
@@ -85,6 +92,10 @@ function Index() {
         );
       })}
     </motion.div>
+
+
+    <Select />
+    </div>
   );
 }
 
