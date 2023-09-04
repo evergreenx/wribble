@@ -3,6 +3,7 @@
 import React from "react";
 import Button from "../Button/Index";
 import { motion } from "framer-motion";
+import { Navigation } from "..";
 
 const links = ["Find Talent", "For Designers", "Learn Design", "Go Pro"];
 
@@ -17,6 +18,8 @@ function Index() {
     visible: { x: 0, opacity: 1, transition: { duration: 0.5 } },
   };
   return (
+
+    <>
     <motion.div
       className="flex p-[24px] items-center justify-between"
       initial="hidden"
@@ -96,7 +99,31 @@ function Index() {
         </div>
         <Button text="Share work" onClick={() => {}} />
       </motion.div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </motion.div>
+
+<Navigation />
+
+</>
+
   );
 }
 
