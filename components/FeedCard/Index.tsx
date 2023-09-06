@@ -1,16 +1,36 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import image from "../../assets/1.png";
 
 export default function Index() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
-    <div className=" mb-[50px]">
-      <div className="imgcover">
+    <div className="mb-[50px] relative">
+      <div
+        className="imgcover relative"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <Image
           src={image}
           alt="cover"
           className="rounded-xl object-fill w-full h-full"
         />
+        {isHovered && (
+          <div className="overlay absolute top-0 bottom-0 inset-0 flex  rounded-t-xl h-[20%] bg-black bg-opacity-10 text-white">
+            <p className="text-lg font-semibold">Project Name</p>
+          </div>
+        )}
       </div>
 
       <div className="info flex items-center justify-between mt-[10px]">

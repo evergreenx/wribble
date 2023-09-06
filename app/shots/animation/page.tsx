@@ -1,3 +1,4 @@
+'use client';
 import { FeedCard } from "@/components";
 import React from "react";
 
