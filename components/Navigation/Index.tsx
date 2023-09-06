@@ -57,11 +57,11 @@ function Index() {
   };
   return (
 
-    <div className="flex items-center justify-between px-14 w-full ">
+    <div className="flex items-center justify-between px-14 w-full mt-[31px]  mb-[32px] ">
 
 <Select />
     <motion.div
-      className="flex  mt-[31px]  mb-[32px]"
+      className="flex  "
       initial="hidden"
       animate="show"
       viewport={{ once: true }}
