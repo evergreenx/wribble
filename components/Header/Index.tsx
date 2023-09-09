@@ -7,6 +7,8 @@ import { AvatarUser, Navigation, TooltipUser } from "..";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const links = ["Find Talent", "For Designers", "Learn Design", "Go Pro"];
 
@@ -22,26 +24,50 @@ function Index() {
   };
   const supabase = createClientComponentClient();
 
-  const [user, setUser] = useState<object | null>({});
+  const router = useRouter();
+
+  const [user, setUser] = useState<object | null | any>({});
+  const [session, setSession] = useState<object | null | any>({});
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      try {
+        setLoading(true);
+        const { data } = await supabase.auth.getUser();
 
-      console.log(user);
+        console.log(data);
 
-      setUser(user);
+        if (data.user) {
+          setUser(data.user);
+        }
+      } catch {
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const getSession = async () => {
+      const { data } = await supabase.auth.getSession();
+
+      if (data.session) {
+        setSession(data.session);
+      }
     };
 
     fetchUser();
-  }, []);
+    getSession();
+  }, [supabase, setUser]);
 
+  console.log(session);
+
+  if (loading) {
+    return "loading";
+  }
   return (
     <>
       <motion.div
-        className="flex p-[24px] items-center justify-between"
+        className="flex p-[24px] justify-between"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -120,9 +146,18 @@ function Index() {
 0 rounded-full p-1 "
             />
           </div>
-          <Button text="Share work" onClick={() => {}} />
 
-          <TooltipUser userImage={user} />
+          {session?.user ? (
+            <>
+              <Button text="Share work" onClick={() => {}} />
+
+              <TooltipUser userImage={user} />
+            </>
+          ) : (
+            <Link href="/login">
+              <Button text="Login" onClick={() => {}} />
+            </Link>
+          )}
         </motion.div>
       </motion.div>
 
