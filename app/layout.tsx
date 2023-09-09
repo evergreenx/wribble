@@ -1,4 +1,4 @@
-import { Header } from "@/components";
+import { Footer, Header } from "@/components";
 import "./globals.css";
 import { Head } from "next/document";
 
@@ -20,6 +20,7 @@ export default function RootLayout({
         <main className="min-h-screen bg-background flex flex-col items-center">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

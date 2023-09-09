@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import React, { useState } from "react";
 import Image from "next/image";
 import image from "../../assets/1.png";
@@ -15,7 +15,7 @@ export default function Index() {
   };
 
   return (
-    <div className="mb-[50px] relative">
+    <div className="lg:mb-[50px] mb-[10px] relative">
       <div
         className="imgcover relative"
         onMouseEnter={handleMouseEnter}
@@ -27,8 +27,16 @@ export default function Index() {
           className="rounded-xl object-fill w-full h-full"
         />
         {isHovered && (
-          <div className="overlay absolute top-0 bottom-0 inset-0 flex  rounded-t-xl h-[20%] bg-black bg-opacity-10 text-white">
-            <p className="text-lg font-semibold">Project Name</p>
+          <div
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%)",
+            }}
+            className="overlay absolute bottom-0 w-full rounded-xl h-[30%] text-white p-[20px] transition-opacity duration-300 ease-in-out"
+          >
+            <p className="font-medium overflow-hidden text-ellipsis text-base">
+              Project Name
+            </p>
           </div>
         )}
       </div>

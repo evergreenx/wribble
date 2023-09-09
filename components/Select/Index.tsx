@@ -11,7 +11,7 @@ import {
 const SelectDemo = () => (
   <Select.Root defaultValue="popular">
     <Select.Trigger
-      className="inline-flex border border-[#F3F3F4] items-center justify-center rounded-[8px] px-[15px] text-[13px] leading-none h-[35px] gap-[5px] bg-white outline-none"
+      className="inline-flex border border-[#F3F3F4] items-center justify-center rounded-[8px] px-[15px] py-[10px] text-[13px] leading-none h-[35px] gap-[5px] bg-white outline-none"
       aria-label="Food"
     >
       <Select.Value placeholder="Popular" />

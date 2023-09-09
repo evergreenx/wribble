@@ -3,7 +3,10 @@
 import React from "react";
 import Button from "../Button/Index";
 import { motion } from "framer-motion";
-import { Navigation } from "..";
+import { AvatarUser, Navigation, TooltipUser } from "..";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const links = ["Find Talent", "For Designers", "Learn Design", "Go Pro"];
 
@@ -17,6 +20,24 @@ function Index() {
     hidden: { x: -20, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.5 } },
   };
+  const supabase = createClientComponentClient();
+
+  const [user, setUser] = useState<object | null>({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      console.log(user);
+
+      setUser(user);
+    };
+
+    fetchUser();
+  }, []);
+
   return (
     <>
       <motion.div
@@ -25,7 +46,7 @@ function Index() {
         animate="visible"
         variants={containerVariants}
       >
-        <motion.div className="flex" variants={itemVariants}>
+        <motion.div className="lg:flex hidden" variants={itemVariants}>
           {links.map((link) => (
             <div
               className=" text-brandblack p-[16px]
@@ -61,7 +82,7 @@ function Index() {
         </motion.div>
 
         <motion.div
-          className="flex space-x-4 items-center "
+          className=" space-x-4 items-center hidden lg:flex "
           variants={itemVariants}
         >
           <div className="search px-3 py-2 rounded-full space-x-2 bg-[#F3F3F4] flex items-center">
@@ -100,6 +121,8 @@ function Index() {
             />
           </div>
           <Button text="Share work" onClick={() => {}} />
+
+          <TooltipUser userImage={user} />
         </motion.div>
       </motion.div>
 

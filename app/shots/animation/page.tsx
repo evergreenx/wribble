@@ -4,9 +4,9 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div className="w-full px-14">
+    <div className="w-full lg:px-14 px-[20px]">
 
-      <div className="grid grid-cols-4 gap-[24px]  w-full">
+      <div className="grid lg:grid-cols-4  gap-[24px]  w-full">
         <FeedCard />
 
         <FeedCard />

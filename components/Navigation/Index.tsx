@@ -56,45 +56,40 @@ function Index() {
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
   };
   return (
-
-    <div className="flex items-center justify-between px-14 w-full mt-[31px]  mb-[32px] ">
-
-<Select />
-    <motion.div
-      className="flex  "
-      initial="hidden"
-      animate="show"
-      viewport={{ once: true }}
-      variants={{
-        hidden: {},
-        show: {
-          transition: {
-            staggerChildren: 0.15,
+    <div className="flex items-center justify-between px-14 w-full scroll overflow-auto mt-[31px]  mb-[32px] ">
+      <Select />
+      <motion.div
+        className="flex  "
+        initial="hidden"
+        animate="show"
+        viewport={{ once: true }}
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.15,
+            },
           },
-        },
-      }}
-    >
+        }}
+      >
+        {navLinks.map((link) => {
+          const isActive = pathname.startsWith(link.url, 0);
 
+          return (
+            <motion.div
+              key={link.url}
+              variants={FADE_DOWN_ANIMATION_VARIANTS}
+              className={`${
+                isActive ? "text-brandblack bg-[#f8f7f4]" : "text-brandblack"
+              } font-semibold text-sm px-4 py-2 capitalize hover:text-brandblack transition duration-200 ease-in-out rounded-full`}
+            >
+              <Link href={link.url}>{link.name}</Link>
+            </motion.div>
+          );
+        })}
+      </motion.div>
 
-      {navLinks.map((link) => {
-        const isActive = pathname.startsWith(link.url, 0);
-
-        return (
-          <motion.div
-            key={link.url}
-            variants={FADE_DOWN_ANIMATION_VARIANTS}
-            className={`${
-              isActive ? "text-brandblack bg-[#f8f7f4]" : "text-brandblack"
-            } font-semibold text-sm px-4 py-2 capitalize hover:text-brandblack transition duration-200 ease-in-out rounded-full`}
-          >
-            <Link href={link.url}>{link.name}</Link>
-          </motion.div>
-        );
-      })}
-    </motion.div>
-
-
-    <Select />
+      <Select />
     </div>
   );
 }
