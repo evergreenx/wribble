@@ -4,6 +4,9 @@ import Messages from "./messages";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import GHLogo from "../../assets/gh.svg";
 import GoogleIcon from "../../assets/google.svg";
+
+import FigmaIcon from "../../assets/figma.svg";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -120,6 +123,24 @@ export default function Login() {
               alt="googleicon"
             />
             Sign In with Google
+          </motion.button>
+
+
+
+          <motion.button
+            variants={inputVariants}
+            className="border rounded-full lg:w-[400px] border-[#ddd] font-medium px-6 py-3 text-black mb-2 flex justify-center items-center space-x-3"
+            onClick={() => {
+              handleSign();
+            }}
+          >
+            <Image
+              src={FigmaIcon}
+              className="mr-2"
+              width={18}
+              alt="googleicon"
+            />
+            Sign In with Figma
           </motion.button>
 
           <Messages />

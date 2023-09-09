@@ -162,6 +162,7 @@ function Index() {
       </motion.div>
 
       <Navigation />
+
     </>
   );
 }

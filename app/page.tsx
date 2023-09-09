@@ -23,5 +23,11 @@ export default async function Index() {
     redirect("/shots/animation");
   }
 
+  if (!session) {
+    redirect("/login");
+  }
+
+  
+
   return <div></div>;
 }
