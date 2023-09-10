@@ -65,7 +65,7 @@ export default function Login() {
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: "http://localhost:3000/auth/callback",
+        redirectTo: "https://wribble.vercel.app/auth/callback",
       },
     });
   };
@@ -74,7 +74,7 @@ export default function Login() {
     await supabase.auth.signInWithOAuth({
       provider: "figma",
       options: {
-        redirectTo: "http://localhost:3000/auth/callback",
+        redirectTo: "https://wribble.vercel.app/auth/callback",
       },
     });
   };
