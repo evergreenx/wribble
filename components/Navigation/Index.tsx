@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 import { motion } from "framer-motion";
-import { Select } from "..";
+import Select  from "../Select/Index";
 
 interface NavLinkProps {
   name: string;

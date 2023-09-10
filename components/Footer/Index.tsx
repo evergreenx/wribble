@@ -13,7 +13,7 @@ const links = [
 
 export default function Index() {
   return (
-    <footer className="px-[135px] py-[30px] flex flex-col lg:flex-row lg:space-y-0 space-y-4 items-center justify-between">
+    <footer className="px-[135px] py-[30px] flex flex-col lg:flex-row lg:space-y-0 items-center justify-between">
       <div className="logo">
         <svg
           width="100"

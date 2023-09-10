@@ -1,6 +1,5 @@
-import Header from "@/components/Header/Index";
-import Navigation from "@/components/Navigation/Index";
 import Footer from "@/components/Footer/Index";
+import Header from "@/components/Header/Index";
 
 import { Head } from "next/document";
 
@@ -9,7 +8,7 @@ export const metadata = {
   description: "Wribble is the best way to share your ideas",
 };
 
-export default function ShotsLayout({
+export default function ProfileLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -17,8 +16,6 @@ export default function ShotsLayout({
   return (
     <>
       <Header />
-
-      <Navigation />
 
       <main className="min-h-screen">{children}</main>
 

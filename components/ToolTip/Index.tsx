@@ -5,21 +5,19 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import { PlusIcon } from "@radix-ui/react-icons";
 import AvatarUser from "../Avatar/Index";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Link from "next/link";
 
-const TooltipUser = ({ userImage }: any) => {
+const TooltipUser = ({ user }: any) => {
   const supabase = createClientComponentClient();
 
-  const signOutUser = async () => {
-   await supabase.auth.signOut();
-  };
 
-  console.log(userImage);
+
   return (
     <Tooltip.Provider>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
           <button className="rounded-full bg-white shadow-[0_2px_10px]">
-            <AvatarUser userImage={userImage} />
+            <AvatarUser userImage={user} />
           </button>
         </Tooltip.Trigger>
         <Tooltip.Portal>
@@ -28,20 +26,16 @@ const TooltipUser = ({ userImage }: any) => {
             sideOffset={5}
           >
             <h3 className="text-[15px] text-[#0d0c22]">
-              {userImage && userImage?.user_metadata?.full_name}
+              <Link href="/profile">
+                {user && user?.user_metadata?.full_name}
+              </Link>
             </h3>
 
             <form action="/auth/sign-out" method="post">
-
-            <button
-              className="text-[15px] text-[#0d0c22] cursor-pointer"
-           
-            >
-
-              Sign out
+              <button className="text-[15px] text-[#0d0c22] cursor-pointer">
+                Sign out
               </button>
-
-              </form>
+            </form>
 
             {/* <Tooltip.Arrow className="fill-white" /> */}
           </Tooltip.Content>

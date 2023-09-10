@@ -1,4 +1,6 @@
-import { Footer, Header } from "@/components";
+import Footer  from "@/components/Footer/Index";
+import Header  from "@/components/Header/Index";
+
 import "./globals.css";
 import { Head } from "next/document";
 
