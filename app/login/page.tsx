@@ -70,6 +70,14 @@ export default function Login() {
     });
   };
 
+  const handleFigmaSign = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "figma",
+      options: {
+        redirectTo: "http://localhost:3000/auth/callback",
+      },
+    });
+  };
   return (
     <div className="flex w-full h-full">
       <div className=" h-full border  hidden lg:block  w-[600px]">
@@ -125,13 +133,11 @@ export default function Login() {
             Sign In with Google
           </motion.button>
 
-
-
           <motion.button
             variants={inputVariants}
             className="border rounded-full lg:w-[400px] border-[#ddd] font-medium px-6 py-3 text-black mb-2 flex justify-center items-center space-x-3"
             onClick={() => {
-              handleSign();
+              handleFigmaSign();
             }}
           >
             <Image

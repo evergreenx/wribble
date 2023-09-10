@@ -56,10 +56,11 @@ function Index() {
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
   };
   return (
-    <div className="flex items-center justify-between px-14 w-full scroll overflow-auto mt-[31px]  mb-[32px] ">
+    <div className=" flex items-center justify-between lg:px-14 w-full mt-[31px]  mb-[32px]  lg:h-[40%]">
+
       <Select />
       <motion.div
-        className="flex  "
+        className=" hidden lg:flex  "
         initial="hidden"
         animate="show"
         viewport={{ once: true }}
