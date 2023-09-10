@@ -64,8 +64,14 @@ export default function Login() {
   const handleSign = async () => {
     await supabase.auth.signInWithOAuth({
       provider: "github",
+
+      
       options: {
-        redirectTo: window.location.origin + "/auth/callback",
+        redirectTo: `${
+          process.env.NEXT_PUBLIC_VERCEL_URL
+            ? 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL +'/auth/callback'
+            : 'http://localhost:3000/auth/callback'
+        }`
       },
     });
   };
