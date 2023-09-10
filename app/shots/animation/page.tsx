@@ -1,8 +1,20 @@
 
 import FeedCard from "@/components/FeedCard/Index";
 import React from "react";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
-export default function Page() {
+export default async function Page() {
+
+  const supabase = createServerComponentClient({cookies})
+  
+let { data: shots, error } = await supabase
+.from('shots')
+.select('*')
+
+
+console.log(shots , 'shots')
+
   return (
     <div className="w-full lg:px-14 px-[20px]">
 

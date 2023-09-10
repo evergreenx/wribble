@@ -85,7 +85,7 @@ export default function Login() {
   };
   return (
     <div className="flex w-full h-full">
-      <div className=" h-full border  hidden lg:block  w-[600px]">
+      <div className=" h-full  hidden lg:block  w-[600px]">
         <video muted loop autoPlay className=" h-full object-cover">
           <source
             src={
