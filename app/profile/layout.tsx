@@ -8,6 +8,8 @@ export const metadata = {
   description: "Wribble is the best way to share your ideas",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function ProfileLayout({
   children,
 }: {
