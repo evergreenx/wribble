@@ -20,7 +20,7 @@ export default function ShotsLayout({
 
       <Navigation />
 
-      <main className="min-h-screen">{children}</main>
+      <section className=" ">{children}</section>
 
       <Footer />
     </>

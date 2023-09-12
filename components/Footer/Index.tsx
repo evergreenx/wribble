@@ -13,7 +13,7 @@ const links = [
 
 export default function Index() {
   return (
-    <footer className="px-[135px] py-[30px] flex flex-col lg:flex-row lg:space-y-0 items-center justify-between">
+    <footer className="  px-[135px] py-[30px] flex flex-col lg:flex-row lg:space-y-0 items-center justify-between">
       <div className="logo">
         <svg
           width="100"
@@ -38,9 +38,9 @@ export default function Index() {
         </svg>
       </div>
 
-      <ul className="flex lg;space-x-9 ">
+      <ul className="flex lg:space-x-9 ">
         {links.map((link) => (
-          <li className="lg:text-sm text-xs text-[#0d0c22] lg:font-semibold capitalize ">
+          <li className="lg:text-sm text-xs  text-[#0d0c22] lg:font-semibold capitalize ">
             <a href="#">{link}</a>
           </li>
         ))}

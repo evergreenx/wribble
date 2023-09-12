@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import image from "../../assets/1.png";
+import { motion } from "framer-motion";
 
 export default function Index() {
   const [isHovered, setIsHovered] = useState(false);
@@ -16,10 +17,16 @@ export default function Index() {
 
   return (
     <div className="lg:mb-[50px] mb-[10px] relative">
-      <div
+      <motion.div
         className="imgcover relative"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+
+        initial={{ opacity: 0, scale: 0.9 }} // Initial animation properties
+        animate={{ opacity: 1, scale: 1 }} // Animation properties when the component enters
+        exit={{ opacity: 0, scale: 0.8 }} // Animation properties when the component exits
+        transition={{ duration: 1 , delay : 0.2 }} // Transition duration
+      
       >
         <Image
           src={image}
@@ -39,9 +46,17 @@ export default function Index() {
             </p>
           </div>
         )}
-      </div>
+      </motion.div>
 
-      <div className="info flex items-center justify-between mt-[10px]">
+      <motion.div className="info flex items-center justify-between mt-[10px]"
+      
+      initial={{ opacity: 0, y: 10 }} // Initial animation properties
+      animate={{ opacity: 1, y: 0 }} // Animation properties when the component enters
+      exit={{ opacity: 0, y: 10 }} // Animation properties when the component exits
+      transition={{ duration: 1.4, delay: 0.5 }} 
+      
+      
+      >
         <div className="username flex items-center space-x-[8px]">
           <div className="userimage">
             <svg
@@ -113,7 +128,7 @@ export default function Index() {
             <p className="text-[#3d3da4] ml-[5px]">2</p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

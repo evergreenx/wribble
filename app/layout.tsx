@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className="h-screen w-full bg-background flex flex-col">
+        <main className="min-h-screen w-full bg-background flex flex-col">
           {children}
         </main>
       </body>

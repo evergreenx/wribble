@@ -6,42 +6,63 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import AvatarUser from "../Avatar/Index";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
+import Image from "next/image";
+
+import * as Separator from '@radix-ui/react-separator';
+
 
 const TooltipUser = ({ user }: any) => {
   const supabase = createClientComponentClient();
 
-
-
   return (
-    <Tooltip.Provider>
-      <Tooltip.Root>
-        <Tooltip.Trigger asChild>
-          <button className="rounded-full bg-white shadow-[0_2px_10px]">
-            <AvatarUser userImage={user} />
-          </button>
-        </Tooltip.Trigger>
-        <Tooltip.Portal>
-          <Tooltip.Content
-            className="data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade select-none bg-white w-[250px] h-[100px] px-[15px] py-[10px] text-[15px] rounded-xl leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity]"
-            sideOffset={5}
-          >
-            <h3 className="text-[15px] text-[#0d0c22]">
-              <Link href="/profile">
-                {user && user?.user_metadata?.full_name}
-              </Link>
-            </h3>
+    <>
+      <Tooltip.Provider>
+        <Tooltip.Root>
+          <Tooltip.Trigger asChild>
+            <button className="rounded-full bg-white">
+              <AvatarUser user={user} />
+            </button>
+          </Tooltip.Trigger>
+          <Tooltip.Portal>
+            <Tooltip.Content
+              className="data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade select-none bg-white min-w-[250px] min-h-[100px] px-[15px] py-[15px] rounded-xl leading-none will-change-[transform,opacity] border"
+              sideOffset={5}
+            >
+              <div className="flex justify-center items-center">
+                <Image
+                  className="rounded-full h-[70px] w-[70px]"
+                  width={200}
+                  height={200}
+                  alt="user"
+                  src={user && user?.user_metadata?.avatar_url}
+                />
+              </div>
 
-            <form action="/auth/sign-out" method="post">
-              <button className="text-[15px] text-[#0d0c22] cursor-pointer">
-                Sign out
-              </button>
-            </form>
+              <h3 className="text-[13px] text-[#0d0c22] text-center my-[14px]">
+                <Link href="/profile">
+                  {user && user?.user_metadata?.full_name}
+                </Link>
+              </h3>
 
-            {/* <Tooltip.Arrow className="fill-white" /> */}
-          </Tooltip.Content>
-        </Tooltip.Portal>
-      </Tooltip.Root>
-    </Tooltip.Provider>
+
+              <Separator.Root
+        className="bg-black border-2 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px mx-[15px]"
+        decorative
+        orientation="vertical"
+      />
+
+              <form action="/auth/sign-out" method="post">
+                <button className="text-[13px] text-[#0d0c22] cursor-pointer my-[13px]">
+                  Sign out
+                </button>
+              </form>
+
+              {/* <Tooltip.Arrow className="fill-white" /> */}
+            </Tooltip.Content>
+          </Tooltip.Portal>
+        </Tooltip.Root>
+      </Tooltip.Provider>
+    </>
   );
 };
 
