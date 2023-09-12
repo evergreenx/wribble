@@ -7,6 +7,8 @@ import { cookies } from "next/headers";
 
 const links = ["Find Talent", "For Designers", "Learn Design", "Go Pro"];
 
+export const dynamic = "force-dynamic";
+
 async function Index() {
 
   const supabase = createServerComponentClient({ cookies });
