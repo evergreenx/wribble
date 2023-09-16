@@ -15,7 +15,9 @@ async function Index() {
 
   const { data } = await supabase.auth.getSession();
 
-  console.log(data);
+  console.log(data)
+
+
   return (
     <div>
       {" "}

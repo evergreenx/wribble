@@ -9,6 +9,24 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      profiles: {
+        Row: {
+          avatar_url: string
+          id: string
+          name: string
+        }
+        Insert: {
+          avatar_url: string
+          id: string
+          name: string
+        }
+        Update: {
+          avatar_url?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       shots: {
         Row: {
           created_at: string
@@ -16,7 +34,6 @@ export interface Database {
           id: number
           image_url: string
           title: string
-          user_data: Json
           user_id: string
         }
         Insert: {
@@ -25,7 +42,6 @@ export interface Database {
           id?: number
           image_url: string
           title: string
-          user_data: Json
           user_id: string
         }
         Update: {
@@ -34,14 +50,13 @@ export interface Database {
           id?: number
           image_url?: string
           title?: string
-          user_data?: Json
           user_id?: string
         }
         Relationships: [
           {
             foreignKeyName: "shots_user_id_fkey"
             columns: ["user_id"]
-            referencedRelation: "users"
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
         ]

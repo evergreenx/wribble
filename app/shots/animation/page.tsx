@@ -2,12 +2,13 @@ import FeedCard from "@/components/FeedCard/Index";
 import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { profile } from "console";
 
 
 export default async function Page() {
   const supabase = createServerComponentClient<Database>({ cookies });
 
-  let { data: shots, error } = await supabase.from("shots").select("*");
+  let { data: shots, error } = await supabase.from("shots").select("* ,profiles(*)");
 
   console.log(shots, "shots");
 
