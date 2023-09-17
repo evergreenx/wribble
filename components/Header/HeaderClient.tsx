@@ -112,7 +112,9 @@ function HeaderClient({ data }: any) {
 
           {data?.session?.user && data?.session.user ? (
             <>
-              <Button text="Share work" onClick={() => {}} />
+              <Link href={"/upload"}>
+                <Button text="Share work" onClick={() => {}} />
+              </Link>
 
               <TooltipUser user={data?.session.user} />
             </>
