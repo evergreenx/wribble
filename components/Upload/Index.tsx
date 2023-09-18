@@ -150,7 +150,7 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
           open={open}
           onOpenChange={setOpen}
         >
-          <Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[14px]">
+          <Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-[#fff] text-[13px]">
             {errorMessage || sizeError}
           </Toast.Title>
           <Toast.Close aria-label="Close">
@@ -163,7 +163,9 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
             altText="Goto schedule to undo"
           ></Toast.Action>
         </Toast.Root>
-        <Toast.Viewport className="[--viewport-padding:_25px] fixed bottom-0 right-0 flex flex-col p-[var(--viewport-padding)] gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
+        <Toast.Viewport className="fixed bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col p-4 gap-4 w-80 max-w-full m-0 list-none z-50 outline-none" />
+
+        {/* <Toast.Viewport className="[--viewport-padding:_25px] fixed bottom-0 left-[50%] right-[50$] flex flex-col p-[var(--viewport-padding)] gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" /> */}
       </Toast.Provider>
     </div>
   );
