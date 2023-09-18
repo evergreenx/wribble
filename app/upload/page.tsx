@@ -7,10 +7,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
 import { motion } from "framer-motion"; // Import the motion module
-
-import { useDropzone } from "react-dropzone";
 import Upload from "@/components/Upload/Index";
-import DialogDemo from "@/components/Dialog";
 import PreviewDialog from "@/components/Dialog";
 
 export default function page() {
@@ -88,7 +85,7 @@ export default function page() {
           animate={{ opacity: 1, y: 0 }} // Animation on load
           exit={{ opacity: 0, y: -20 }} // Animation on exit
           transition={{ duration: 0.5 }} // Animation duration
-          className="lg:text-3xl text-xl font-extrabold text-center"
+          className="lg:text-3xl text-xl font-extrabold text-center text-[#0d0c22]"
         >
           What have you been working on?
         </motion.h1>
@@ -128,7 +125,12 @@ export default function page() {
         </div>
       </form>
 
-      <PreviewDialog open={openDialog} setOpen={setOpenDialog} />
+      {/* preview dialog */}
+      <PreviewDialog
+        open={openDialog}
+        setOpen={setOpenDialog}
+        imagePreview={selectedImage}
+      />
     </>
   );
 }
