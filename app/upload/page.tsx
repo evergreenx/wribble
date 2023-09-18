@@ -10,11 +10,18 @@ import { motion } from "framer-motion"; // Import the motion module
 
 import { useDropzone } from "react-dropzone";
 import Upload from "@/components/Upload/Index";
+import DialogDemo from "@/components/Dialog";
+import PreviewDialog from "@/components/Dialog";
 
 export default function page() {
   const [shotsTitle, setShotsTitle] = useState<string>("");
   const [shotsDesc, setShotsDesc] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState<string>("");
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+
+  const handleOpenPreviewDialog = () => {
+    setOpenDialog(true);
+  };
 
   const postData = async (e: React.FormEvent<HTMLFormElement>) => {
     // "use server";
@@ -67,9 +74,10 @@ export default function page() {
 
           <motion.button
             initial={{ scale: 0.8 }} // Initial animation values
-            whileHover={{ scale: 1 }} // Animation on hover
+            // whileHover={{ scale: 1 }} // Animation on hover
             className="bg-black font-semibold rounded-full px-[20px] text-sm h-[48px] text-ghostWhite  hover:bg-brandblack transition duration-200 ease-in-out"
             type="submit"
+            onClick={handleOpenPreviewDialog}
           >
             Continue
           </motion.button>
@@ -119,6 +127,8 @@ export default function page() {
           </motion.div>
         </div>
       </form>
+
+      <PreviewDialog open={openDialog} setOpen={setOpenDialog} />
     </>
   );
 }
