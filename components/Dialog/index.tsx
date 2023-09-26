@@ -4,6 +4,9 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 
 import Image from "next/image";
 import AnimatedMulti from "../MultiSelect/Index";
+import SwitchFeedBack from "../Switch/Index";
+import Button from "../Button/Index";
+import Link from "next/link";
 
 const PreviewDialog = ({
   open,
@@ -18,42 +21,46 @@ const PreviewDialog = ({
     <Dialog.Trigger asChild></Dialog.Trigger>
     <Dialog.Portal>
       <Dialog.Overlay className="bg-[#00000072] data-[state=open]:animate-overlayShow fixed inset-0" />
-      <Dialog.Content className="data-[state=open]:animate-contentShow overflow-y-auto fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[860px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[48px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
+      <Dialog.Content className="data-[state=open]:animate-contentShow overflow-y-auto fixed top-[50%] h-[60%] left-[50%] max-h-[85vh] w-[90vw] max-w-[860px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[48px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
         <Dialog.Title className=" m-0 text-2xl font-bold text-[#0d0c22]">
           Final Touches
         </Dialog.Title>
 
         <div className="flex lg:flex-row flex-col space-y-6 lg:space-y-0 lg:space-x-14">
-          <div className="preview w-full">
+          <div className="preview ">
             <h3 className="text-[14px] my-4">Thumbnail preview</h3>
             <Image
               src={imagePreview}
               alt="preview"
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               className="rounded-xl"
             />
           </div>
-          <div className="controls">
+          <div className="controls w-full ">
+            <label className=" text-[14px] text-[#0d0c22]">
+              Tags
+              <AnimatedMulti />
+            </label>
 
-<label className=" text-[14px] text-[#0d0c22]">
+            <SwitchFeedBack />
 
+            <div className="actions flex space-x-5 my-10">
+              <Link
+                href="/"
+                className="border-gray-200 border flex justify-center items-center font-semibold rounded-full px-[24px] text-sm h-[48px]  transition duration-200 ease-in-out"
+              >
+                Cancel
+              </Link>
 
-  Tags
-
-  <AnimatedMulti />
-</label>
-       
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
-            suscipit dicta consequatur fugiat recusandae quod pariatur
-            distinctio tempora dolores culpa quibusdam et illo praesentium vitae
-            optio, natus hic ea sed?
+              <Button text="publish now" onClick={() => {}} />
+            </div>
           </div>
         </div>
         <Dialog.Close asChild>
           <button
             onClick={() => setOpen(false)}
-            className="text-violet11 hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+            className=" hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none border-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
             aria-label="Close"
           >
             <Cross2Icon />
