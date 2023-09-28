@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import * as Toast from "@radix-ui/react-toast";
 
 interface UploadProps {
-  selectedImage: string;
+  selectedImage: any
   setSelectedImage: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -15,6 +15,8 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [sizeError, setSizeError] = useState("");
   const [open, setOpen] = React.useState(false);
+
+  const [clientImage , setClientImage] = useState('')
   const eventDateRef = React.useRef(new Date());
   const timerRef = React.useRef(0);
 
@@ -30,6 +32,7 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
         reader.onerror = () => console.log("file reading has failed");
         reader.onload = () => {
           const binaryStr = reader.result as ArrayBuffer;
+          console
           const imageUrl = URL.createObjectURL(file);
 
           // Check image dimensions
@@ -42,7 +45,8 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
                 "Go big or go home. Your file's dimensions should be at least 400x300."
               );
             } else {
-              setSelectedImage(imageUrl);
+              setClientImage(imageUrl);
+              setSelectedImage(file)
               setErrorMessage(""); // Clear any previous error message
             }
           };
@@ -50,7 +54,7 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
         reader.readAsArrayBuffer(file);
       });
     },
-    [setSelectedImage]
+    [clientImage , selectedImage]
   );
 
   const maxSizeBytes = 5 * 1024 * 1024; // 5MB max size
@@ -60,6 +64,7 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
     if (file.size > maxSizeBytes) {
       setOpen(true);
 
+  
       setSizeError("File is too large. Maximum size is 5MB.");
 
       return false;
@@ -90,7 +95,7 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
 
   return (
     <div className="w-full p-2">
-      {selectedImage ? (
+      {clientImage ? (
         // Animation for the selected image
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -100,7 +105,7 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
           className="selected-image "
         >
           <Image
-            src={selectedImage}
+            src={clientImage}
             alt="Selected"
             className="rounded-2xl w-full h-auto"
             width={600}
@@ -108,7 +113,7 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
             quality={100}
             priority={true}
             placeholder="blur"
-            blurDataURL={selectedImage}
+            blurDataURL={clientImage}
           />
         </motion.div>
       ) : (
