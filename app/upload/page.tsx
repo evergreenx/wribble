@@ -2,19 +2,29 @@
 import {
   createServerActionClient,
   createServerComponentClient,
+  createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import React, { useCallback, useState } from "react";
+import React, { use, useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion"; // Import the motion module
-
-import { useDropzone } from "react-dropzone";
 import Upload from "@/components/Upload/Index";
+import PreviewDialog from "@/components/Dialog";
 
 export default function page() {
   const [shotsTitle, setShotsTitle] = useState<string>("");
   const [shotsDesc, setShotsDesc] = useState<string>("");
-  const [selectedImage, setSelectedImage] = useState<string>("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const [imageUrl , setImageUrl] = useState<string | undefined>('')
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+
+  const supabase = createClientComponentClient();
+  const handleOpenPreviewDialog = () => {
+    setOpenDialog(true);
+  };
 
   const postData = async (e: React.FormEvent<HTMLFormElement>) => {
     // "use server";
@@ -48,6 +58,38 @@ export default function page() {
   //     </li>
   //   ));
 
+  console.log(selectedImage);
+
+  async function uploadFile(file: any) {
+    const uniqueIdentifier = Date.now();
+    const newImageName = `public/${uniqueIdentifier}_${file.name}`;
+
+    try {
+      // Set a loading state while the upload is in progress
+      setIsLoading(true);
+
+      const { data, error } = await supabase.storage
+        .from("shots")
+        .upload(newImageName, file);
+
+      // setSelectedImage(data);
+
+      console.log(data)
+
+      setImageUrl(data?.path)
+    } catch (error) {
+      // Handle any unexpected errors
+      setIsError(true);
+    } finally {
+      // Reset the loading state when the upload is complete
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    uploadFile(selectedImage);
+  }, [selectedImage]);
+
   return (
     <>
       <form onSubmit={postData}>
@@ -66,10 +108,17 @@ export default function page() {
           </Link>
 
           <motion.button
+            style={{
+              cursor:
+                shotsDesc === "" || shotsTitle === ""
+                  ? "not-allowed"
+                  : "pointer",
+            }}
             initial={{ scale: 0.8 }} // Initial animation values
-            whileHover={{ scale: 1 }} // Animation on hover
+            // whileHover={{ scale: 1 }} // Animation on hover
             className="bg-black font-semibold rounded-full px-[20px] text-sm h-[48px] text-ghostWhite  hover:bg-brandblack transition duration-200 ease-in-out"
             type="submit"
+            onClick={handleOpenPreviewDialog}
           >
             Continue
           </motion.button>
@@ -80,7 +129,7 @@ export default function page() {
           animate={{ opacity: 1, y: 0 }} // Animation on load
           exit={{ opacity: 0, y: -20 }} // Animation on exit
           transition={{ duration: 0.5 }} // Animation duration
-          className="lg:text-3xl text-xl font-extrabold text-center"
+          className="lg:text-3xl text-xl font-extrabold text-center text-[#0d0c22]"
         >
           What have you been working on?
         </motion.h1>
@@ -98,9 +147,13 @@ export default function page() {
             className="bg-white w-full text-4xl my-[20px] font-semibold text-[#0d0c22] border-none outline-none mx-auto justify-center flex"
           />
 
+          {isError && "An error occurred while uploading the file."}
+          {isLoading && "loading"}
+
           <Upload
             selectedImage={selectedImage}
             setSelectedImage={setSelectedImage}
+            imageUrl={imageUrl}
           />
 
           <motion.div
@@ -119,6 +172,13 @@ export default function page() {
           </motion.div>
         </div>
       </form>
+
+      {/* preview dialog */}
+      <PreviewDialog
+        open={openDialog}
+        setOpen={setOpenDialog}
+        imagePreview={selectedImage}
+      />
     </>
   );
 }
