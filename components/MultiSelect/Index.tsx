@@ -30,7 +30,7 @@ export default function AnimatedMulti() {
 
     menu: (
       provided: any,
-      state: { selectProps: { width: any; menuColor: any } }
+      state: any
     ) => ({
       ...provided,
       width: state.selectProps.width,
