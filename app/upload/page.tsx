@@ -6,7 +6,7 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { use, useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion"; // Import the motion module
 import Upload from "@/components/Upload/Index";
 import PreviewDialog from "@/components/Dialog";
@@ -14,7 +14,8 @@ import PreviewDialog from "@/components/Dialog";
 export default function page() {
   const [shotsTitle, setShotsTitle] = useState<string>("");
   const [shotsDesc, setShotsDesc] = useState<string>("");
-  const [selectedImage, setSelectedImage] = useState<any>("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const [imageUrl , setImageUrl] = useState<string | undefined>('')
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,7 +72,11 @@ export default function page() {
         .from("shots")
         .upload(newImageName, file);
 
-      setSelectedImage(data);
+      // setSelectedImage(data);
+
+      console.log(data)
+
+      setImageUrl(data?.path)
     } catch (error) {
       // Handle any unexpected errors
       setIsError(true);
@@ -148,6 +153,7 @@ export default function page() {
           <Upload
             selectedImage={selectedImage}
             setSelectedImage={setSelectedImage}
+            imageUrl={imageUrl}
           />
 
           <motion.div

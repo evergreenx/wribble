@@ -18,6 +18,14 @@ const nextConfig = {
         hostname: "s3-alpha.figma.com",
         port: "",
       },
+
+
+      {
+        protocol: "https",
+        hostname: "esfptwmvbhihfhohbgtv.supabase.co",
+        port: "",
+      },
+      // https://esfptwmvbhihfhohbgtv.supabase.co/storage/v1/object/public
     ],
   },
   experimental: {

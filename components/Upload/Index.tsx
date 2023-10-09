@@ -8,9 +8,10 @@ import * as Toast from "@radix-ui/react-toast";
 interface UploadProps {
   selectedImage: any
   setSelectedImage: React.Dispatch<React.SetStateAction<string>>;
+  imageUrl:string | undefined
 }
 
-const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
+const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage , imageUrl }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [sizeError, setSizeError] = useState("");
@@ -25,7 +26,7 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
   }, []);
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      acceptedFiles.forEach((file: File) => {
+      acceptedFiles.forEach((file: any) => {
         const reader = new FileReader();
 
         reader.onabort = () => console.log("file reading was aborted");
@@ -54,7 +55,7 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
         reader.readAsArrayBuffer(file);
       });
     },
-    [clientImage , selectedImage]
+    [clientImage ]
   );
 
   const maxSizeBytes = 5 * 1024 * 1024; // 5MB max size
@@ -89,12 +90,27 @@ const Upload: React.FC<UploadProps> = ({ selectedImage, setSelectedImage }) => {
     accept: {
       "image/jpeg": [],
       "image/png": [],
+      "image/jpg": [],
+
     },
     maxSize: maxSizeBytes,
   });
 
   return (
     <div className="w-full p-2">
+
+
+
+{imageUrl}
+<Image src={`https://esfptwmvbhihfhohbgtv.supabase.co/storage/v1/object/public/shots/${imageUrl}`}
+alt='t'
+height={200}
+width={200}
+
+/>
+
+
+
       {clientImage ? (
         // Animation for the selected image
         <motion.div
