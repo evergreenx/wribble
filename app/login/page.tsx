@@ -66,11 +66,8 @@ export default function Login() {
       provider: "github",
 
       options: {
-        redirectTo: `${
-          process.env.NEXT_PUBLIC_VERCEL_URL
-            ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL + "/auth/callback"
-            : "http://localhost:3000/auth/callback"
-        }`,
+        redirectTo: window.location.origin + "/auth/callback"
+        ,
       },
     });
   };
